@@ -1,6 +1,4 @@
 import { FastifyPluginCallback, FastifyRequest } from 'fastify'
-import { IncomingMessage } from 'http'
-import { BodyIsNotStringError } from '../error'
 import { AnyObject, GetHandler, Handler, RawRequest } from '../types'
 import { getStringFromIncomingMessage, getUrlWithBase } from '../util'
 

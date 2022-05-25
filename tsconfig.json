@@ -11,6 +11,6 @@
     "noEmit": true,
     "isolatedModules": true
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "scripts", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

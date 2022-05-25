@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import express from 'express'
 import fastify from 'fastify'
 import { createApp } from 'h3'
 import { createServer } from 'http'
 import Koa from 'koa'
-import { defineHandler } from '.'
-import { getExpressAdapter } from './adapters/express'
-import { getFastifyAdapter } from './adapters/fastify'
-import { getH3Adapter } from './adapters/h3'
-import { getKoaAdapter } from './adapters/koa'
-import { getNodeAdapter } from './adapters/node'
+import { defineHandler } from '../src'
+import { getExpressAdapter } from '../src/adapters/express'
+import { getFastifyAdapter } from '../src/adapters/fastify'
+import { getH3Adapter } from '../src/adapters/h3'
+import { getKoaAdapter } from '../src/adapters/koa'
+import { getNodeAdapter } from '../src/adapters/node'
 
 const genericHandler = defineHandler((options, helpers) => {
   return {

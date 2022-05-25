@@ -1,19 +1,30 @@
-import { describe, expect, test } from 'vitest'
+import { beforeAll, describe, expect, test } from 'vitest'
+import { MaybePromise } from '../src/types'
 
-export interface AppInfo {
-  name: string
+interface App {
+  close(): void
   port: number
 }
 
-export const testRes = (appInfo: AppInfo) => {
-  describe(appInfo.name, () => {
-    test('basic fetch', async () => {
-      const res = await fetch(`http://localhost:${appInfo.port}`)
-      const text = await res.text()
-      if (appInfo.name === 'fastify') {
-        console.log(text)
-      }
-      expect(text).toBe('Hello world!')
-    })
+let app: App
+
+export const testRes = () => {
+  test('basic fetch', async () => {
+    const res = await fetch(`http://localhost:${app.port}`)
+    const text = await res.text()
+
+    expect(text).toBe('Hello world!')
+  })
+}
+
+export const setup = (name: string, setupApp: () => MaybePromise<App>) => {
+  beforeAll(async () => {
+    app = await setupApp()
+
+    return () => app.close()
+  })
+
+  describe(name, () => {
+    testRes()
   })
 }

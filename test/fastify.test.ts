@@ -1,29 +1,21 @@
-import fastify, { FastifyInstance } from 'fastify'
+import fastify from 'fastify'
 import getPort from 'get-port'
-import { afterAll, beforeAll } from 'vitest'
 import { getFastifyAdapter } from '../src/adapters/fastify'
 import { genericHandler } from './handler'
-import { AppInfo, testRes } from './test-fetch'
+import { setup } from './test-fetch'
 
-const getApp = async () => {
+setup('fastify', async () => {
   const app = fastify()
   const fastifyAdapter = getFastifyAdapter(genericHandler)
   app.register(await fastifyAdapter({}))
 
-  return app
-}
+  const port = await getPort()
+  await app.listen(port)
 
-let app: FastifyInstance
-const appInfo: AppInfo = { name: 'fastify', port: 0 }
-
-beforeAll(async () => {
-  app = await getApp()
-  appInfo.port = await getPort()
-  app.listen(appInfo.port)
+  return {
+    close() {
+      app.close()
+    },
+    port,
+  }
 })
-
-afterAll(() => {
-  app.close()
-})
-
-testRes(appInfo)
