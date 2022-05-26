@@ -14,7 +14,7 @@ export interface HTTPRequest {
   body: unknown
 }
 
-type UnhttpResponse = {
+export type UnhttpResponse = {
   status: number
   headers?: HTTPHeaders
   body: BodyInit | null | undefined
