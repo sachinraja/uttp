@@ -1,21 +1,17 @@
 import express from 'express'
-import getPort from 'get-port'
 import { getExpressAdapter } from '../src/adapters/express'
-import { genericHandler } from './handler'
-import { setup } from './test-fetch'
+import { testFetch } from './test-fetch'
 
-setup('express', async () => {
+testFetch('express', async (handler, port) => {
   const app = express()
-  const expressAdapter = getExpressAdapter(genericHandler)
+  const expressAdapter = getExpressAdapter(handler)
   app.use(await expressAdapter())
 
-  const port = await getPort()
   const server = app.listen(port)
 
   return {
     close() {
       server.close()
     },
-    port,
   }
 })

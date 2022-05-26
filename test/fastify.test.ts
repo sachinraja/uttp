@@ -1,21 +1,17 @@
 import fastify from 'fastify'
-import getPort from 'get-port'
 import { getFastifyAdapter } from '../src/adapters/fastify'
-import { genericHandler } from './handler'
-import { setup } from './test-fetch'
+import { testFetch } from './test-fetch'
 
-setup('fastify', async () => {
+testFetch('fastify', async (handler, port) => {
   const app = fastify()
-  const fastifyAdapter = getFastifyAdapter(genericHandler)
+  const fastifyAdapter = getFastifyAdapter(handler)
   app.register(await fastifyAdapter())
 
-  const port = await getPort()
   await app.listen(port)
 
   return {
     close() {
       app.close()
     },
-    port,
   }
 })

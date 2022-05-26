@@ -1,18 +1,15 @@
-import getPort from 'get-port'
 import { createServer } from 'http'
 import { getNodeAdapter } from '../src/adapters/node'
-import { genericHandler } from './handler'
-import { setup } from './test-fetch'
+import { testFetch } from './test-fetch'
 
-setup('node', async () => {
-  const nodeAdapter = getNodeAdapter(genericHandler)
-  const port = await getPort()
+testFetch('node', async (handler, port) => {
+  const nodeAdapter = getNodeAdapter(handler)
+
   const server = createServer(await nodeAdapter()).listen(port)
 
   return {
     close() {
       server.close()
     },
-    port,
   }
 })
