@@ -68,10 +68,7 @@
       "src/adapters/node.ts",
       "src/adapters/fetch.ts"
     ],
-    "format": [
-      "esm",
-      "cjs"
-    ],
+    "format": ["esm", "cjs"],
     "dts": {
       "resolve": true
     },
