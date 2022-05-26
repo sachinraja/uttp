@@ -20,13 +20,13 @@ type UnhttpResponse = {
   body: BodyInit | null | undefined
 }
 
-export type AnyObject = Record<string, any>
-export type EmptyObject = Record<string, never>
-
 export type MaybePromise<T> = T | Promise<T>
 
 export type HandleRequest = (req: HTTPRequest) => MaybePromise<UnhttpResponse>
-export interface Handler {
+export interface AdapterOptions {
+  maxBodySize?: number
+}
+export interface HandlerBag {
   handleRequest: HandleRequest
   adapterOptions: AdapterOptions
 }
@@ -35,11 +35,13 @@ export interface Helpers {
   parseBodyAsString: (rawRequest: RawRequest) => MaybePromise<string | undefined>
 }
 
-export type GetHandler<Options extends AnyObject = EmptyObject> = (
-  options: Options,
+export type Handler = (
   helpers: Helpers,
-) => MaybePromise<Handler>
+  ...args: any[]
+) => MaybePromise<HandlerBag>
 
-export interface AdapterOptions {
-  maxBodySize?: number
-}
+export const defineHandler = <THandler extends Handler>(handler: THandler): THandler => handler
+
+type DropFirst<T extends unknown[]> = T extends [unknown, ...infer U] ? U : never
+
+export type inferHandlerOptions<THandler extends Handler> = DropFirst<Parameters<THandler>>

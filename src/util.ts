@@ -1,5 +1,4 @@
 import { IncomingMessage } from 'http'
-import { AnyObject, GetHandler } from './types'
 
 export const RequestEntityTooLarge = new Error('request entity too large')
 
@@ -38,7 +37,3 @@ export const getUrlWithBase = (url: string) => {
 
   return new URL(stringUrlWithBase)
 }
-
-export const defineHandler = <Options extends AnyObject>(
-  handler: GetHandler<Options>,
-): GetHandler<Options> => handler

@@ -1,13 +1,13 @@
 import { defineEventHandler } from 'h3'
-import { AnyObject, GetHandler } from '../types'
+import { Handler, inferHandlerOptions } from '../types'
 import { getNodeAdapter } from './node'
 
-export const getH3Adapter = <HandlerOptions extends AnyObject>(
-  getHandler: GetHandler<HandlerOptions>,
+export const getH3Adapter = <THandler extends Handler>(
+  handler: THandler,
 ) => {
-  const nodeAdapter = getNodeAdapter(getHandler)
-  return async (options: HandlerOptions) => {
-    const nodeHandler = await nodeAdapter(options)
+  const nodeAdapter = getNodeAdapter(handler)
+  return async (...options: inferHandlerOptions<THandler>) => {
+    const nodeHandler = await nodeAdapter(...options)
 
     return defineEventHandler(async (event) => {
       await nodeHandler(event.req, event.res)

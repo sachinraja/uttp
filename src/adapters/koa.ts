@@ -1,21 +1,21 @@
 import { IncomingMessage } from 'http'
 import { Middleware } from 'koa'
-import { AnyObject, GetHandler, Handler, RawRequest } from '../types'
+import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../types'
 import { getStringFromIncomingMessage } from '../util'
 
-export const getKoaAdapter = <HandlerOptions extends AnyObject>(
-  getHandler: GetHandler<HandlerOptions>,
+export const getKoaAdapter = <THandler extends Handler>(
+  handler: THandler,
 ) => {
-  return async (options: HandlerOptions) => {
-    const handler: Handler = await getHandler(options, {
+  return async (...options: inferHandlerOptions<THandler>) => {
+    const handlerBag: HandlerBag = await handler({
       parseBodyAsString(rawRequest) {
         const req = rawRequest as unknown as IncomingMessage
-        return getStringFromIncomingMessage(req, { maxBodySize: handler.adapterOptions.maxBodySize })
+        return getStringFromIncomingMessage(req, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
       },
-    })
+    }, ...options)
 
     const middleware: Middleware = async (ctx) => {
-      const res = await handler.handleRequest({
+      const res = await handlerBag.handleRequest({
         rawRequest: ctx.req as unknown as RawRequest,
         body: ctx.body,
         headers: ctx.headers,

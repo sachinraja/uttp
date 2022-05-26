@@ -7,7 +7,7 @@ import { setup } from './test-fetch'
 setup('fastify', async () => {
   const app = fastify()
   const fastifyAdapter = getFastifyAdapter(genericHandler)
-  app.register(await fastifyAdapter({}))
+  app.register(await fastifyAdapter())
 
   const port = await getPort()
   await app.listen(port)

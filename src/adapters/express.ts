@@ -1,10 +1,10 @@
-import { Handler } from 'express'
-import { AnyObject, GetHandler } from '../types'
+import { Handler as ExpressHandler } from 'express'
+import { Handler, inferHandlerOptions } from '../types'
 import { getNodeAdapter } from './node'
 
-export const getExpressAdapter = <HandlerOptions extends AnyObject>(
-  getHandler: GetHandler<HandlerOptions>,
+export const getExpressAdapter = <THandler extends Handler>(
+  handler: THandler,
 ) => {
-  const nodeAdapter = getNodeAdapter(getHandler)
-  return (options: HandlerOptions): Promise<Handler> => nodeAdapter(options)
+  const nodeAdapter = getNodeAdapter(handler)
+  return (...options: inferHandlerOptions<THandler>): Promise<ExpressHandler> => nodeAdapter(...options)
 }

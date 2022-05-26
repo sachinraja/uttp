@@ -7,7 +7,7 @@ import { setup } from './test-fetch'
 setup('express', async () => {
   const app = express()
   const expressAdapter = getExpressAdapter(genericHandler)
-  app.use(await expressAdapter({}))
+  app.use(await expressAdapter())
 
   const port = await getPort()
   const server = app.listen(port)

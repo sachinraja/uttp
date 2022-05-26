@@ -8,7 +8,7 @@ import { setup } from './test-fetch'
 setup('h3', async () => {
   const h3Adapter = getH3Adapter(genericHandler)
   const app = createApp()
-  app.use('/', await h3Adapter({}))
+  app.use('/', await h3Adapter())
 
   const port = await getPort()
   const server = createServer(app).listen(port)

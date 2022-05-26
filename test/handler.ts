@@ -1,6 +1,6 @@
 import { defineHandler } from '../src'
 
-export const genericHandler = defineHandler((_, helpers) => {
+export const genericHandler = defineHandler((helpers) => {
   return {
     handleRequest(req) {
       helpers.parseBodyAsString(req.rawRequest)

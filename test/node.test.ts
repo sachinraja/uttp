@@ -7,7 +7,7 @@ import { setup } from './test-fetch'
 setup('node', async () => {
   const nodeAdapter = getNodeAdapter(genericHandler)
   const port = await getPort()
-  const server = createServer(await nodeAdapter({})).listen(port)
+  const server = createServer(await nodeAdapter()).listen(port)
 
   return {
     close() {

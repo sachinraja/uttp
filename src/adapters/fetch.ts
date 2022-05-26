@@ -1,21 +1,21 @@
-import { AnyObject, GetHandler, RawRequest } from '../types'
+import { Handler, inferHandlerOptions, RawRequest } from '../types'
 import { getUrlWithBase } from '../util'
 
-export const getFastifyAdapter = <HandlerOptions extends AnyObject>(
-  getHandler: GetHandler<HandlerOptions>,
+export const getFastifyAdapter = <THandler extends Handler>(
+  handler: THandler,
 ) => {
-  return async (options: HandlerOptions) => {
-    const handler = await getHandler(options, {
+  return async (...options: inferHandlerOptions<THandler>) => {
+    const handlerBag = await handler({
       parseBodyAsString(rawRequest) {
         const req = rawRequest as unknown as Request
         return req.text()
       },
-    })
+    }, ...options)
 
     return async (req: Request) => {
       const url = getUrlWithBase(req.url!)
 
-      const res = await handler.handleRequest({
+      const res = await handlerBag.handleRequest({
         rawRequest: req as unknown as RawRequest,
         body: await req.text(),
         headers: Object.fromEntries(req.headers),
