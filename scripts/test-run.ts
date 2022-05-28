@@ -11,9 +11,10 @@ import { getH3Adapter } from '../src/adapters/h3'
 import { getKoaAdapter } from '../src/adapters/koa'
 import { getNodeAdapter } from '../src/adapters/node'
 
-const genericHandler = defineHandler((options, helpers) => {
+const genericHandler = defineHandler((helpers, options) => {
   return {
     async handleRequest(req) {
+      req.rawRequest
       const body = await helpers.parseBodyAsString(req.rawRequest)
       console.log(body)
       return {

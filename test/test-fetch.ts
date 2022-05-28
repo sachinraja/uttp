@@ -29,7 +29,8 @@ export const testFetch = (
         const body = JSON.stringify([1, 2, 3])
         const res = await fetch(url, {
           headers: {
-            'content-type': 'application/json',
+            // ensure header name is converted to lowercase
+            'Content-Type': 'application/json',
           },
           method: 'POST',
           body,

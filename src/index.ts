@@ -3,6 +3,8 @@ export type {
   Handler,
   HandlerBag,
   HandleRequest,
+  Helpers,
+  HTTPRequest,
   inferHandlerOptions,
   RawRequest,
   UnhttpResponse,
