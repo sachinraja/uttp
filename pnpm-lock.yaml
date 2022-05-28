@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@types/express': 4.17.13
   '@types/koa': 2.13.4
-  '@types/node': 17.0.35
+  '@types/node': 17.0.36
   '@typescript-eslint/eslint-plugin': 5.26.0
   '@typescript-eslint/parser': 5.26.0
   dprint: 0.29.1
@@ -28,7 +28,7 @@ specifiers:
 devDependencies:
   '@types/express': 4.17.13
   '@types/koa': 2.13.4
-  '@types/node': 17.0.35
+  '@types/node': 17.0.36
   '@typescript-eslint/eslint-plugin': 5.26.0_hzuh7e2up357pvq3mkokjvu2lq
   '@typescript-eslint/parser': 5.26.0_xztl6dhthcahlo6akmb2bmjmle
   dprint: 0.29.1
@@ -118,14 +118,14 @@ packages:
   /@types/accepts/1.3.5:
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
     dependencies:
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@types/body-parser/1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@types/chai-subset/1.3.3:
@@ -141,7 +141,7 @@ packages:
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@types/content-disposition/0.5.5:
@@ -154,13 +154,13 @@ packages:
       '@types/connect': 3.4.35
       '@types/express': 4.17.13
       '@types/keygrip': 1.0.2
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@types/express-serve-static-core/4.17.28:
     resolution: {integrity: sha512-P1BJAEAW3E2DJUlkgq4tOL3RyMunoWXqbSCygWo5ZIWTjUgN1YnaXWW4VWl/oc8vs/XoYibEGBKP0uZyF4AHig==}
     dependencies:
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: true
@@ -206,15 +206,15 @@ packages:
       '@types/http-errors': 1.8.2
       '@types/keygrip': 1.0.2
       '@types/koa-compose': 3.2.5
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@types/mime/1.3.2:
     resolution: {integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==}
     dev: true
 
-  /@types/node/17.0.35:
-    resolution: {integrity: sha512-vu1SrqBjbbZ3J6vwY17jBs8Sr/BKA+/a/WtjRG+whKg1iuLFOosq872EXS0eXWILdO36DHQQeku/ZcL6hz2fpg==}
+  /@types/node/17.0.36:
+    resolution: {integrity: sha512-V3orv+ggDsWVHP99K3JlwtH20R7J4IhI1Kksgc+64q5VxgfRkQG8Ws3MFm/FZOKDYGy9feGFlZ70/HpCNe9QaA==}
     dev: true
 
   /@types/qs/6.9.7:
@@ -229,7 +229,7 @@ packages:
     resolution: {integrity: sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 17.0.35
+      '@types/node': 17.0.36
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.26.0_hzuh7e2up357pvq3mkokjvu2lq:
