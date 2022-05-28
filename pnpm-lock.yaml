@@ -19,7 +19,7 @@ specifiers:
   nano-staged: 0.8.0
   npm-run-all: 4.1.5
   rimraf: 3.0.2
-  tsup: 5.12.8
+  tsup: 6.0.1
   typescript: 4.7.2
   undici: 5.3.0
   vite: 2.9.9
@@ -44,7 +44,7 @@ devDependencies:
   nano-staged: 0.8.0
   npm-run-all: 4.1.5
   rimraf: 3.0.2
-  tsup: 5.12.8_typescript@4.7.2
+  tsup: 6.0.1_typescript@4.7.2
   typescript: 4.7.2
   undici: 5.3.0
   vite: 2.9.9
@@ -2778,12 +2778,19 @@ packages:
     engines: {node: '>=0.6.x'}
     dev: true
 
-  /tsup/5.12.8_typescript@4.7.2:
-    resolution: {integrity: sha512-fSBzUBtrnAQ+XKPfj1KcZ2Pl0EUlKBqpbTmRAs+2mL34fQlowrm6ccQgOYyMe9MMAcejMP6/7Rw3qKjx1lreZA==}
+  /tsup/6.0.1_typescript@4.7.2:
+    resolution: {integrity: sha512-2Pl1YkEEvzfg4aYgwUILaHV0wwZQKO7mNHMQChyzdCNlQqf11eug7gWk86XCb3CvRofCXBX87x73BTGjyS3cOQ==}
+    engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
+      '@swc/core': ^1
+      postcss: ^8.4.12
       typescript: ^4.1.0
     peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      postcss:
+        optional: true
       typescript:
         optional: true
     dependencies:
@@ -2803,7 +2810,6 @@ packages:
       tree-kill: 1.2.2
       typescript: 4.7.2
     transitivePeerDependencies:
-      - postcss
       - supports-color
       - ts-node
     dev: true
