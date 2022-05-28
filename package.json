@@ -3,6 +3,16 @@
   "version": "0.0.0",
   "type": "module",
   "description": "write (your request handlers) once, run anywhere",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinraja/unhttp.git"
+  },
+  "homepage": "https://github.com/sachinraja/unhttp#readme",
+  "bugs": {
+    "url": "https://github.com/sachinraja/unhttp/issues"
+  },
+  "author": "Sachin Raja <sachinraja2349@gmail.com>",
+  "license": "MIT",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "exports": {
