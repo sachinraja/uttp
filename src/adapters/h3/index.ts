@@ -1,6 +1,6 @@
 import { defineEventHandler } from 'h3'
-import { Handler, inferHandlerOptions } from '../../types'
-import { getNodeAdapter } from '../node'
+import { Handler, inferHandlerOptions } from '../../types.js'
+import { getNodeAdapter } from '../node/index.js'
 
 export const getH3Adapter = <THandler extends Handler>(
   handler: THandler,

@@ -1,6 +1,6 @@
 import { Handler as ExpressHandler } from 'express'
-import { Handler, inferHandlerOptions } from '../../types'
-import { getNodeAdapter } from '../node/index'
+import { Handler, inferHandlerOptions } from '../../types.js'
+import { getNodeAdapter } from '../node/index.js'
 
 export const getExpressAdapter = <THandler extends Handler>(
   handler: THandler,

@@ -1,6 +1,6 @@
 import { createServer } from 'http'
-import { testFetch } from '../../../test/test-fetch'
-import { getNodeAdapter } from './index'
+import { testFetch } from '../../../test/test-fetch.js'
+import { getNodeAdapter } from './index.js'
 
 testFetch('node', async (handler, port) => {
   const nodeAdapter = getNodeAdapter(handler)

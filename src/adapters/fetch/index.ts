@@ -1,7 +1,7 @@
-import { Handler, inferHandlerOptions, RawRequest } from '../../types'
-import { getUrlWithBase } from '../../util'
+import { Handler, inferHandlerOptions, RawRequest } from '../../types.js'
+import { getUrlWithBase } from '../../util.js'
 
-export const getFastifyAdapter = <THandler extends Handler>(
+export const getFetchAdapter = <THandler extends Handler>(
   handler: THandler,
 ) => {
   return async (...options: inferHandlerOptions<THandler>) => {

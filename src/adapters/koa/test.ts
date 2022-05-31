@@ -1,6 +1,6 @@
 import Koa from 'koa'
-import { testFetch } from '../../../test/test-fetch'
-import { getKoaAdapter } from './index'
+import { testFetch } from '../../../test/test-fetch.js'
+import { getKoaAdapter } from './index.js'
 
 testFetch('koa', async (handler, port) => {
   const app = new Koa()

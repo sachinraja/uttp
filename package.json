@@ -27,7 +27,9 @@
       "default": "./dist/adapters/*/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && run-p build:*",
     "build:js": "tsup",
@@ -77,8 +79,14 @@
     "*.{js,ts,md,json,yaml}": "dprint fmt"
   },
   "tsup": {
-    "entry": ["src/index.ts", "src/adapters/*/index.ts"],
-    "format": ["esm", "cjs"],
+    "entry": [
+      "src/index.ts",
+      "src/adapters/*/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
     "splitting": true
   }
 }

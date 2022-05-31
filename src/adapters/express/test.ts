@@ -1,6 +1,6 @@
 import express from 'express'
-import { testFetch } from '../../../test/test-fetch'
-import { getExpressAdapter } from './index'
+import { testFetch } from '../../../test/test-fetch.js'
+import { getExpressAdapter } from './index.js'
 
 testFetch('express', async (handler, port) => {
   const app = express()

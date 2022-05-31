@@ -1,6 +1,6 @@
 import fastify from 'fastify'
-import { testFetch } from '../../../test/test-fetch'
-import { getFastifyAdapter } from './index'
+import { testFetch } from '../../../test/test-fetch.js'
+import { getFastifyAdapter } from './index.js'
 
 testFetch('fastify', async (handler, port) => {
   const app = fastify()

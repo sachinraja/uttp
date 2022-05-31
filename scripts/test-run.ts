@@ -11,7 +11,7 @@ import { getH3Adapter } from '../src/adapters/h3'
 import { getKoaAdapter } from '../src/adapters/koa'
 import { getNodeAdapter } from '../src/adapters/node'
 
-const genericHandler = defineHandler((helpers, options) => {
+const genericHandler = defineHandler((helpers) => {
   return {
     async handleRequest(req) {
       req.rawRequest
@@ -33,10 +33,9 @@ const genericHandler = defineHandler((helpers, options) => {
 })
 
 const runNode = async () => {
-  const nodeAdapter = getNodeAdapter(genericHandler)
-  const nodeHandler = await nodeAdapter({})
+  const nodeHandler = getNodeAdapter(genericHandler)
 
-  const server = createServer(nodeHandler)
+  const server = createServer(await nodeHandler())
 
   server.listen(3000, () => {
     console.log('Listening on port 3000')
@@ -44,11 +43,10 @@ const runNode = async () => {
 }
 
 const runKoa = async () => {
-  const koaAdapter = getKoaAdapter(genericHandler)
-  const koaHandler = await koaAdapter({})
+  const koaHandler = getKoaAdapter(genericHandler)
 
   const app = new Koa()
-  app.use(koaHandler)
+  app.use(await koaHandler())
 
   app.listen(3000, () => {
     console.log('Listening on port 3000')
@@ -56,11 +54,10 @@ const runKoa = async () => {
 }
 
 const runExpress = async () => {
-  const expressAdapter = getExpressAdapter(genericHandler)
-  const expressHandler = await expressAdapter({})
+  const expressHandler = getExpressAdapter(genericHandler)
 
   const app = express()
-  app.use(expressHandler)
+  app.use(await expressHandler())
 
   app.listen(3000, () => {
     console.log('Listening on port 3000')
@@ -68,11 +65,10 @@ const runExpress = async () => {
 }
 
 const runH3 = async () => {
-  const h3Adapter = getH3Adapter(genericHandler)
-  const h3Handler = await h3Adapter({})
+  const h3Handler = getH3Adapter(genericHandler)
 
   const app = createApp()
-  app.use('/', h3Handler)
+  app.use(await h3Handler())
 
   const server = createServer(app)
   server.listen(3000, () => {
@@ -81,15 +77,14 @@ const runH3 = async () => {
 }
 
 const runFastify = async () => {
-  const fastifyPlugin = getFastifyAdapter(genericHandler)
-  const fastifyHandler = await fastifyPlugin({})
+  const getFastifyPlugin = getFastifyAdapter(genericHandler)
 
   const server = fastify()
-  server.register(fastifyHandler)
+  server.register(await getFastifyPlugin())
 
   server.listen(3000, () => {
     console.log('Listening on port 3000')
   })
 }
 
-runFastify()
+runH3()

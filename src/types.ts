@@ -69,6 +69,6 @@ export type Handler = (
 
 export const defineHandler = <THandler extends Handler>(handler: THandler): THandler => handler
 
-type DropFirst<T extends unknown[]> = T extends [unknown, ...infer U] ? U : never
+export type DropFirst<T extends unknown[]> = T extends [unknown, ...infer U] ? U : never
 
 export type inferHandlerOptions<THandler extends Handler> = DropFirst<Parameters<THandler>>

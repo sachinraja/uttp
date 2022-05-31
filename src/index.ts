@@ -8,5 +8,5 @@ export type {
   inferHandlerOptions,
   RawRequest,
   UnhttpResponse,
-} from './types'
-export { defineHandler } from './types'
+} from './types.js'
+export { defineHandler } from './types.js'

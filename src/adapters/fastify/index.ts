@@ -1,6 +1,6 @@
 import { FastifyPluginCallback, FastifyRequest } from 'fastify'
-import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types'
-import { getStringFromIncomingMessage, getUrlWithBase } from '../../util'
+import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types.js'
+import { getStringFromIncomingMessage, getUrlWithBase } from '../../util.js'
 
 export interface FastifyAdapterOptions<TOptions extends any[]> {
   setPrefix?(...options: TOptions): string

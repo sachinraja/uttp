@@ -1,7 +1,7 @@
 import { IncomingMessage } from 'http'
 import { Middleware } from 'koa'
-import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types'
-import { getStringFromIncomingMessage } from '../../util'
+import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types.js'
+import { getStringFromIncomingMessage } from '../../util.js'
 
 export const getKoaAdapter = <THandler extends Handler>(
   handler: THandler,

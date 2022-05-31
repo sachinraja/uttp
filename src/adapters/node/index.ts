@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http'
-import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types'
-import { getStringFromIncomingMessage, getUrlWithBase } from '../../util'
+import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types.js'
+import { getStringFromIncomingMessage, getUrlWithBase } from '../../util.js'
 
 export const getNodeAdapter = <THandler extends Handler>(
   handler: THandler,

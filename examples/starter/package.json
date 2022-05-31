@@ -1,0 +1,65 @@
+{
+  "name": "unhttp-starter",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs"
+    },
+    "./adapters/*": {
+      "types": "./dist/adapters/*/index.d.ts",
+      "import": "./dist/adapters/*/index.js",
+      "default": "./dist/adapters/*/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepublishOnly": "pnpm build",
+    "test:node": "node --loader esbuild-node-loader scripts/node-client.ts"
+  },
+  "keywords": [
+    "unhttp"
+  ],
+  "peerDependencies": {
+    "express": "^4",
+    "fastify": "^3",
+    "h3": "*",
+    "koa": "^2"
+  },
+  "dependencies": {
+    "unhttp": "^0.0.0",
+    "zod": "^3.17.3"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13",
+    "esbuild-node-loader": "0.8.0",
+    "express": "4.18.1",
+    "fastify": "3.29.0",
+    "h3": "0.7.8",
+    "koa": "2.13.4",
+    "tsup": "6.0.1",
+    "typescript": "4.7.2"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts",
+      "src/adapters/*.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": {
+      "resolve": true
+    },
+    "splitting": true
+  }
+}

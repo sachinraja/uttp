@@ -7,7 +7,7 @@ currently supports:
 - [Node (vanilla HTTP)](https://nodejs.org/api/http.html)
 - [Express](https://expressjs.com/)
 - [Fastify](https://www.fastify.io/)
-- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) (Cloudflare Workers, Deno, SvelteKit, Astro, Remix, etc.)
+- [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) (Cloudflare Workers, Deno, SvelteKit, Astro, Remix, etc.)
 - [h3](https://github.com/unjs/h3) (Nuxt)
 - [Koa](https://koajs.com/)
 
@@ -25,7 +25,7 @@ First, define your universal request handler:
 // handler.ts
 import { defineHandler } from 'unhttp'
 
-export const universalHandler = defineHandler(() => {
+export const handler = defineHandler(() => {
   // return an object that will be used by each adapter
   return {
     // called on each request
@@ -50,17 +50,17 @@ Then you can use adapters to get middleware/plugins/handlers for the server fram
 For Node:
 
 ```ts
-// node.ts
+// adapters/node.ts
 import { getNodeAdapter } from 'unhttp/adapters/node'
-import { universalHandler } from './handler'
+import { handler } from '../handler'
 
-export const nodeHandler = getNodeAdapter(universalHandler)
+export const nodeHandler = getNodeAdapter(handler)
 ```
 
 Users would use it like this:
 
 ```ts
-import { nodeHandler } from 'my-lib/node'
+import { nodeHandler } from 'my-lib/adapters/node'
 
 const server = createServer(await nodeHandler())
 
@@ -72,17 +72,17 @@ This process is the same for other server frameworks.
 For Fastify:
 
 ```ts
-// fastify.ts
+// adapters/fastify.ts
 import { getFastifyAdapter } from 'unhttp/adapters/fastify'
-import { universalHandler } from './handler'
+import { handler } from '../handler'
 
-export const getFastifyPlugin = getFastifyAdapter(universalHandler)
+export const getFastifyPlugin = getFastifyAdapter(handler)
 ```
 
 Users would use it like this:
 
 ```ts
-import { getFastifyPlugin } from 'my-lib/fastify'
+import { getFastifyPlugin } from 'my-lib/adapters/fastify'
 
 const server = fastify()
 
@@ -100,7 +100,7 @@ A universal request object is passed to `handleRequest` containing some common p
 ```ts
 import { defineHandler } from 'unhttp'
 
-export const universalHandler = defineHandler(() => {
+export const handler = defineHandler(() => {
   return {
     handleRequest(req) {
       if (req.method !== 'GET') {
@@ -125,7 +125,7 @@ Request handlers are passed a set of universal functions that vary in implementa
 ```ts
 import { defineHandler } from 'unhttp'
 
-export const universalHandler = defineHandler((helpers) => {
+export const handler = defineHandler((helpers) => {
   return {
     async handleRequest(req) {
       // each adapter will pass helpers
@@ -163,7 +163,7 @@ interface HandlerOptions {
   maxBodySize?: number
 }
 
-export const universalHandler = defineHandler(
+export const handler = defineHandler(
   // specify options type here
   // can specify as many arguments as you want after `helpers`
   // which the user will need to pass
@@ -171,6 +171,8 @@ export const universalHandler = defineHandler(
     return {
       async handleRequest(req) {
         const body = await helpers.parseBodyAsString(req.rawRequest)
+        if (!body) return { status: 400, body: 'must have body' }
+
         const parsedBody = await options.parse(body)
 
         // ...
@@ -188,7 +190,7 @@ export const universalHandler = defineHandler(
 Users will pass options like this:
 
 ```ts
-import { nodeHandler } from 'my-lib/node'
+import { nodeHandler } from 'my-lib/adapters/node'
 
 const server = createServer(await nodeHandler({ parse: JSON.parse }))
 
@@ -202,7 +204,7 @@ You must return an `adapterOptions` object. These options may be derived from us
 ```ts
 import { defineHandler } from 'unhttp'
 
-export const universalHandler = defineHandler(() => {
+export const handler = defineHandler(() => {
   return {
     handleRequest() {
       return { status: 200, body: 'Hello world!' }
