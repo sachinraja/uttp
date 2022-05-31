@@ -1,6 +1,6 @@
 # unhttp
 
-write (your request handlers) once, run anywhere
+write your request handlers once, run anywhere
 
 currently supports:
 

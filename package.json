@@ -2,7 +2,7 @@
   "name": "unhttp",
   "version": "0.0.0",
   "type": "module",
-  "description": "write (your request handlers) once, run anywhere",
+  "description": "write your request handlers once, run anywhere",
   "repository": {
     "type": "git",
     "url": "https://github.com/sachinraja/unhttp.git"
