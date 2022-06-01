@@ -4,78 +4,78 @@ import { Handler, MaybePromise } from '../src/types'
 import { genericHandler, genericHandlerWithBody } from './handlers'
 
 export const testFetch = (
-  name: string,
-  setupApp: (handler: Handler, port: number) => MaybePromise<{ close: () => void }>,
+	name: string,
+	setupApp: (handler: Handler, port: number) => MaybePromise<{ close: () => void }>,
 ) => {
-  describe(name, () => {
-    test('basic fetch', async () => {
-      const port = await getPort()
-      const { close } = await setupApp(genericHandler, port)
+	describe(name, () => {
+		test('basic fetch', async () => {
+			const port = await getPort()
+			const { close } = await setupApp(genericHandler, port)
 
-      const response = await fetch(`http://localhost:${port}`)
-      const text = await response.text()
+			const response = await fetch(`http://localhost:${port}`)
+			const text = await response.text()
 
-      expect(text).toBe('Hello world!')
+			expect(text).toBe('Hello world!')
 
-      close()
-    })
+			close()
+		})
 
-    describe('handler with body', () => {
-      test('basic', async () => {
-        const port = await getPort()
-        const { close } = await setupApp(genericHandlerWithBody, port)
-        const url = `http://localhost:${port}`
+		describe('handler with body', () => {
+			test('basic', async () => {
+				const port = await getPort()
+				const { close } = await setupApp(genericHandlerWithBody, port)
+				const url = `http://localhost:${port}`
 
-        const body = JSON.stringify([1, 2, 3])
-        const response = await fetch(url, {
-          headers: {
-            // ensure header name is converted to lowercase
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-          body,
-        })
-        const text = await response.text()
+				const body = JSON.stringify([1, 2, 3])
+				const response = await fetch(url, {
+					headers: {
+						// ensure header name is converted to lowercase
+						'Content-Type': 'application/json',
+					},
+					method: 'POST',
+					body,
+				})
+				const text = await response.text()
 
-        expect(text).toBe(body)
+				expect(text).toBe(body)
 
-        close()
-      })
+				close()
+			})
 
-      test('errors with no content-type', async () => {
-        const port = await getPort()
-        const { close } = await setupApp(genericHandlerWithBody, port)
-        const url = `http://localhost:${port}`
+			test('errors with no content-type', async () => {
+				const port = await getPort()
+				const { close } = await setupApp(genericHandlerWithBody, port)
+				const url = `http://localhost:${port}`
 
-        const body = JSON.stringify({ a: 1, b: [2, 3], c: 4 })
-        const response = await fetch(url, {
-          method: 'POST',
-          body,
-        })
+				const body = JSON.stringify({ a: 1, b: [2, 3], c: 4 })
+				const response = await fetch(url, {
+					method: 'POST',
+					body,
+				})
 
-        expect(response.status).toBe(400)
-        expect(await response.text()).toBe('content-type must be json')
+				expect(response.status).toBe(400)
+				expect(await response.text()).toBe('content-type must be json')
 
-        close()
-      })
+				close()
+			})
 
-      test('errors with no body', async () => {
-        const port = await getPort()
-        const { close } = await setupApp(genericHandlerWithBody, port)
-        const url = `http://localhost:${port}`
+			test('errors with no body', async () => {
+				const port = await getPort()
+				const { close } = await setupApp(genericHandlerWithBody, port)
+				const url = `http://localhost:${port}`
 
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-          },
-        })
+				const response = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'content-type': 'application/json',
+					},
+				})
 
-        expect(response.status).toBe(400)
-        expect(await response.text()).toBe('must have body')
+				expect(response.status).toBe(400)
+				expect(await response.text()).toBe('must have body')
 
-        close()
-      })
-    })
-  })
+				close()
+			})
+		})
+	})
 }

@@ -26,20 +26,20 @@ First, define your universal request handler:
 import { defineHandler } from 'unhttp'
 
 export const handler = defineHandler(() => {
-  // return an object that will be used by each adapter
-  return {
-    // called on each request
-    handleRequest() {
-      // return a response object
-      // that will be sent by the server framework
-      return {
-        status: 200,
-        body: 'Hello world!',
-        headers: { 'Content-Type': 'text/html' },
-      }
-    },
-    adapterOptions: {},
-  }
+	// return an object that will be used by each adapter
+	return {
+		// called on each request
+		handleRequest() {
+			// return a response object
+			// that will be sent by the server framework
+			return {
+				status: 200,
+				body: 'Hello world!',
+				headers: { 'Content-Type': 'text/html' },
+			}
+		},
+		adapterOptions: {},
+	}
 })
 ```
 
@@ -101,20 +101,20 @@ A universal request object is passed to `handleRequest` containing some common p
 import { defineHandler } from 'unhttp'
 
 export const handler = defineHandler(() => {
-  return {
-    handleRequest(req) {
-      if (req.method !== 'GET') {
-        return { status: 400, body: 'method must be get' }
-      }
+	return {
+		handleRequest(req) {
+			if (req.method !== 'GET') {
+				return { status: 400, body: 'method must be get' }
+			}
 
-      return {
-        status: 200,
-        body: 'Hello world!',
-        headers: { 'Content-Type': 'text/html' },
-      }
-    },
-    adapterOptions: {},
-  }
+			return {
+				status: 200,
+				body: 'Hello world!',
+				headers: { 'Content-Type': 'text/html' },
+			}
+		},
+		adapterOptions: {},
+	}
 })
 ```
 
@@ -159,31 +159,31 @@ Your request handler can take in options from users of your handler:
 import { defineHandler } from 'unhttp'
 
 interface HandlerOptions {
-  parse(text: string): any | Promise<any>
-  maxBodySize?: number
+	parse(text: string): any | Promise<any>
+	maxBodySize?: number
 }
 
 export const handler = defineHandler(
-  // specify options type here
-  // can specify as many arguments as you want after `helpers`
-  // which the user will need to pass
-  (helpers, options: HandlerOptions) => {
-    return {
-      async handleRequest(req) {
-        const body = await helpers.parseBodyAsString(req.rawRequest)
-        if (!body) return { status: 400, body: 'must have body' }
+	// specify options type here
+	// can specify as many arguments as you want after `helpers`
+	// which the user will need to pass
+	(helpers, options: HandlerOptions) => {
+		return {
+			async handleRequest(req) {
+				const body = await helpers.parseBodyAsString(req.rawRequest)
+				if (!body) return { status: 400, body: 'must have body' }
 
-        const parsedBody = await options.parse(body)
+				const parsedBody = await options.parse(body)
 
-        // ...
+				// ...
 
-        return { status: 200 }
-      },
-      adapterOptions: {
-        maxBodySize: options.maxBodySize,
-      },
-    }
-  },
+				return { status: 200 }
+			},
+			adapterOptions: {
+				maxBodySize: options.maxBodySize,
+			},
+		}
+	},
 )
 ```
 
@@ -205,15 +205,15 @@ You must return an `adapterOptions` object. These options may be derived from us
 import { defineHandler } from 'unhttp'
 
 export const handler = defineHandler(() => {
-  return {
-    handleRequest() {
-      return { status: 200, body: 'Hello world!' }
-    },
-    adapterOptions: {
-      // limit body size
-      maxBodySize: 1000,
-    },
-  }
+	return {
+		handleRequest() {
+			return { status: 200, body: 'Hello world!' }
+		},
+		adapterOptions: {
+			// limit body size
+			maxBodySize: 1000,
+		},
+	}
 })
 ```
 

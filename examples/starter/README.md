@@ -70,7 +70,7 @@ server.register(await getFastifyPlugin(/* options */))
 import { fetchHandler } from 'unhttp-starter/adapters/fetch'
 
 export default {
-  fetch: await fetchHandler(/* options */),
+	fetch: await fetchHandler(/* options */),
 }
 ```
 
