@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'http'
+import { IncomingMessage, ServerResponse } from 'node:http'
 import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types.js'
 import { getStringFromIncomingMessage, getUrlWithBase } from '../../util.js'
 
@@ -8,33 +8,33 @@ export const getNodeAdapter = <THandler extends Handler>(
   return async (...options: inferHandlerOptions<THandler>) => {
     const handlerBag: HandlerBag = await handler({
       parseBodyAsString(rawRequest) {
-        const req = rawRequest as unknown as IncomingMessage
-        return getStringFromIncomingMessage(req, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
+        const request = rawRequest as unknown as IncomingMessage
+        return getStringFromIncomingMessage(request, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
       },
     }, ...options)
 
-    const requestListener = async (req: IncomingMessage, nodeRes: ServerResponse): Promise<void> => {
-      const url = getUrlWithBase(req.url!)
+    const requestListener = async (request: IncomingMessage, nodeResponse: ServerResponse): Promise<void> => {
+      const url = getUrlWithBase(request.url!)
 
-      const res = await handlerBag.handleRequest({
-        rawRequest: req as unknown as RawRequest,
+      const response = await handlerBag.handleRequest({
+        rawRequest: request as unknown as RawRequest,
         body: undefined,
-        headers: req.headers,
-        method: req.method!,
+        headers: request.headers,
+        method: request.method!,
         searchParams: url.searchParams,
       })
 
-      nodeRes.statusCode = res.status
+      nodeResponse.statusCode = response.status
 
-      if (res.headers) {
-        for (const [key, value] of Object.entries(res.headers)) {
+      if (response.headers) {
+        for (const [key, value] of Object.entries(response.headers)) {
           if (typeof value === 'undefined') continue
 
-          nodeRes.setHeader(key, value)
+          nodeResponse.setHeader(key, value)
         }
       }
 
-      nodeRes.end(res.body)
+      nodeResponse.end(response.body)
     }
 
     return requestListener

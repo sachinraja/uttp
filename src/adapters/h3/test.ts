@@ -1,5 +1,5 @@
 import { createApp } from 'h3'
-import { createServer } from 'http'
+import { createServer } from 'node:http'
 import { testFetch } from '../../../test/test-fetch.js'
 import { getH3Adapter } from './index.js'
 

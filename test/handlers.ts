@@ -17,15 +17,15 @@ export const genericHandler = defineHandler(() => {
 
 export const genericHandlerWithBody = defineHandler((helpers) => {
   return {
-    async handleRequest(req) {
-      if (req.headers['content-type'] !== 'application/json') {
+    async handleRequest(request) {
+      if (request.headers['content-type'] !== 'application/json') {
         return {
           status: 400,
           body: 'content-type must be json',
         }
       }
 
-      const body = await helpers.parseBodyAsString(req.rawRequest)
+      const body = await helpers.parseBodyAsString(request.rawRequest)
 
       if (!body) {
         return {

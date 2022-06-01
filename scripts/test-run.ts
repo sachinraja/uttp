@@ -2,8 +2,8 @@
 import express from 'express'
 import fastify from 'fastify'
 import { createApp } from 'h3'
-import { createServer } from 'http'
 import Koa from 'koa'
+import { createServer } from 'node:http'
 import { defineHandler } from '../src'
 import { getExpressAdapter } from '../src/adapters/express'
 import { getFastifyAdapter } from '../src/adapters/fastify'
@@ -13,9 +13,9 @@ import { getNodeAdapter } from '../src/adapters/node'
 
 const genericHandler = defineHandler((helpers) => {
   return {
-    async handleRequest(req) {
-      req.rawRequest
-      const body = await helpers.parseBodyAsString(req.rawRequest)
+    async handleRequest(request) {
+      request.rawRequest
+      const body = await helpers.parseBodyAsString(request.rawRequest)
       console.log(body)
       return {
         body: JSON.stringify({ message: 'Hello World' }),

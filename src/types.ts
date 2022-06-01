@@ -64,7 +64,7 @@ export interface Helpers {
 
 export type Handler = (
   helpers: Helpers,
-  ...args: any[]
+  ...arguments_: any[]
 ) => MaybePromise<HandlerBag>
 
 export const defineHandler = <THandler extends Handler>(handler: THandler): THandler => handler

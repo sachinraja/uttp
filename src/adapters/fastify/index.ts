@@ -13,10 +13,10 @@ export const getFastifyAdapter = <THandler extends Handler>(
   return async (...options: inferHandlerOptions<THandler>) => {
     const handlerBag: HandlerBag = await handler({
       parseBodyAsString(rawRequest) {
-        const req = rawRequest as unknown as FastifyRequest
-        if (typeof req.body === 'string') return req.body
+        const request = rawRequest as unknown as FastifyRequest
+        if (typeof request.body === 'string') return request.body
 
-        return getStringFromIncomingMessage(req.raw, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
+        return getStringFromIncomingMessage(request.raw, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
       },
     }, options)
 
@@ -27,30 +27,31 @@ export const getFastifyAdapter = <THandler extends Handler>(
         /.*/,
         { bodyLimit: handlerBag.adapterOptions.maxBodySize },
         (_, body, done) => {
+          // eslint-disable-next-line unicorn/no-null
           done(null, body)
         },
       )
 
       const prefix = fastifyAdapterOptions.setPrefix?.(...options) ?? '/'
 
-      instance.all(prefix, async (req, reply) => {
-        const url = getUrlWithBase(req.url)
+      instance.all(prefix, async (request, reply) => {
+        const url = getUrlWithBase(request.url)
 
-        const res = await handlerBag.handleRequest({
-          rawRequest: req as unknown as RawRequest,
-          body: req.body,
-          headers: req.headers,
-          method: req.method!,
+        const response = await handlerBag.handleRequest({
+          rawRequest: request as unknown as RawRequest,
+          body: request.body,
+          headers: request.headers,
+          method: request.method!,
           searchParams: url.searchParams,
         })
 
-        reply.status(res.status)
+        reply.status(response.status)
 
-        if (res.headers) {
-          reply.headers(res.headers)
+        if (response.headers) {
+          reply.headers(response.headers)
         }
 
-        reply.send(res.body)
+        reply.send(response.body)
       })
     }
 

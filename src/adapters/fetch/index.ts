@@ -7,40 +7,40 @@ export const getFetchAdapter = <THandler extends Handler>(
   return async (...options: inferHandlerOptions<THandler>) => {
     const handlerBag = await handler({
       parseBodyAsString(rawRequest) {
-        const req = rawRequest as unknown as Request
-        return req.text()
+        const request = rawRequest as unknown as Request
+        return request.text()
       },
     }, ...options)
 
-    return async (req: Request) => {
-      const url = getUrlWithBase(req.url!)
+    return async (request: Request) => {
+      const url = getUrlWithBase(request.url!)
 
-      const res = await handlerBag.handleRequest({
-        rawRequest: req as unknown as RawRequest,
-        body: await req.text(),
-        headers: Object.fromEntries(req.headers),
-        method: req.method!,
+      const response = await handlerBag.handleRequest({
+        rawRequest: request as unknown as RawRequest,
+        body: await request.text(),
+        headers: Object.fromEntries(request.headers),
+        method: request.method!,
         searchParams: url.searchParams,
       })
 
-      const fetchRes = new Response(res.body, {
-        status: res.status,
+      const fetchResponse = new Response(response.body, {
+        status: response.status,
       })
 
-      if (res.headers) {
-        for (const [key, value] of Object.entries(res.headers)) {
+      if (response.headers) {
+        for (const [key, value] of Object.entries(response.headers)) {
           if (typeof value === 'undefined') continue
 
           if (typeof value === 'string') {
-            fetchRes.headers.set(key, value)
+            fetchResponse.headers.set(key, value)
             continue
           }
 
-          for (const v of value) fetchRes.headers.append(key, v)
+          for (const v of value) fetchResponse.headers.append(key, v)
         }
       }
 
-      return fetchRes
+      return fetchResponse
     }
   }
 }

@@ -1,4 +1,4 @@
-import { IncomingMessage } from 'http'
+import { IncomingMessage } from 'node:http'
 
 export const RequestEntityTooLarge = new Error('request entity too large')
 
@@ -27,7 +27,7 @@ export const getStringFromIncomingMessage = async (
         return resolve(readBody)
       }
 
-      resolve(undefined)
+      resolve()
     })
   })
 }

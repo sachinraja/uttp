@@ -1,4 +1,4 @@
-import { createServer } from 'http'
+import { createServer } from 'node:http'
 import { testFetch } from '../../../test/test-fetch.js'
 import { getNodeAdapter } from './index.js'
 

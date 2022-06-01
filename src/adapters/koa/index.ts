@@ -1,5 +1,5 @@
-import { IncomingMessage } from 'http'
 import { Middleware } from 'koa'
+import { IncomingMessage } from 'node:http'
 import { Handler, HandlerBag, inferHandlerOptions, RawRequest } from '../../types.js'
 import { getStringFromIncomingMessage } from '../../util.js'
 
@@ -9,31 +9,31 @@ export const getKoaAdapter = <THandler extends Handler>(
   return async (...options: inferHandlerOptions<THandler>) => {
     const handlerBag: HandlerBag = await handler({
       parseBodyAsString(rawRequest) {
-        const req = rawRequest as unknown as IncomingMessage
-        return getStringFromIncomingMessage(req, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
+        const request = rawRequest as unknown as IncomingMessage
+        return getStringFromIncomingMessage(request, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
       },
     }, ...options)
 
-    const middleware: Middleware = async (ctx) => {
-      const res = await handlerBag.handleRequest({
-        rawRequest: ctx.req as unknown as RawRequest,
-        body: ctx.body,
-        headers: ctx.headers,
-        method: ctx.method,
-        searchParams: ctx.URL.searchParams,
+    const middleware: Middleware = async (context) => {
+      const response = await handlerBag.handleRequest({
+        rawRequest: context.req as unknown as RawRequest,
+        body: context.body,
+        headers: context.headers,
+        method: context.method,
+        searchParams: context.URL.searchParams,
       })
 
-      ctx.status = res.status
+      context.status = response.status
 
-      if (res.headers) {
-        for (const [key, value] of Object.entries(res.headers)) {
+      if (response.headers) {
+        for (const [key, value] of Object.entries(response.headers)) {
           if (typeof value === 'undefined') continue
 
-          ctx.set(key, value)
+          context.set(key, value)
         }
       }
 
-      ctx.body = res.body
+      context.body = response.body
     }
 
     return middleware

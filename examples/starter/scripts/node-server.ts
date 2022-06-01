@@ -1,11 +1,11 @@
-import { createServer } from 'http'
+import { createServer } from 'node:http'
 import { nodeHandler } from '../src/adapters/node.js'
 import { User } from '../src/index.js'
 
 const users: Record<User['id'], number> = {}
 
-for (let i = 0; i < 100; i++) {
-  users[i] = Math.floor(Math.random() * 100)
+for (let index = 0; index < 100; index++) {
+  users[index] = Math.floor(Math.random() * 100)
 }
 
 const server = createServer(
