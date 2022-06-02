@@ -11,7 +11,7 @@ currently supports:
 - [h3](https://github.com/unjs/h3) (Nuxt)
 - [Koa](https://koajs.com/)
 
-## Installation
+## Install
 
 ```sh
 npm install unhttp

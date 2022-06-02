@@ -16,13 +16,7 @@ npx degit sachinraja/unhttp/examples/starter
 
 ## Install
 
-```
-npm install unhttp-starter
-```
-
-## Install
-
-```bash
+```sh
 npm install unhttp-starter
 ```
 
