@@ -1,1 +1,1 @@
-export * from '../../dist/adapters/koa'
+export * from '../../dist/adapters/koa/index.js'

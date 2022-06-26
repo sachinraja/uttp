@@ -1,1 +1,1 @@
-export * from '../../dist/adapters/express'
+export * from '../../dist/adapters/express/index.js'

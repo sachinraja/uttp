@@ -19,14 +19,15 @@ export interface HTTPRequest {
 	 * This is a branded type to ensure that you only pass the actual request to helper functions.
 	 */
 	rawRequest: RawRequest
-	method: string
-	searchParams: URLSearchParams
-	headers: HTTPHeaders
 	/**
 	 * The body of the request from the server framework.
 	 * This is only to give access the the body if necessary, but using the {@link Helpers} to get the body is preferred.
 	 */
 	body: unknown
+	headers: HTTPHeaders
+	url: URL
+	searchParams: URLSearchParams
+	method: string
 }
 
 export type UnhttpResponse = {

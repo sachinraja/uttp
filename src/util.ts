@@ -27,7 +27,8 @@ export const getStringFromIncomingMessage = async (
 				return resolve(readBody)
 			}
 
-			resolve()
+			// eslint-disable-next-line unicorn/no-useless-undefined
+			resolve(undefined)
 		})
 	})
 }

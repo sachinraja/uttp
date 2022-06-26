@@ -20,8 +20,9 @@ export const getNodeAdapter = <THandler extends Handler>(
 				rawRequest: request as unknown as RawRequest,
 				body: undefined,
 				headers: request.headers,
-				method: request.method!,
+				url,
 				searchParams: url.searchParams,
+				method: request.method!,
 			})
 
 			nodeResponse.statusCode = response.status

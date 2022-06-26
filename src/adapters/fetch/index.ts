@@ -19,8 +19,9 @@ export const getFetchAdapter = <THandler extends Handler>(
 				rawRequest: request as unknown as RawRequest,
 				body: await request.text(),
 				headers: Object.fromEntries(request.headers),
-				method: request.method!,
+				url,
 				searchParams: url.searchParams,
+				method: request.method!,
 			})
 
 			const fetchResponse = new Response(response.body, {

@@ -10,6 +10,7 @@ currently supports:
 - [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) (Cloudflare Workers, Deno, SvelteKit, Astro, Remix, etc.)
 - [h3](https://github.com/unjs/h3) (Nuxt)
 - [Koa](https://koajs.com/)
+- [AWS Lambda](https://aws.amazon.com/lambda/)
 
 ## Install
 
@@ -151,6 +152,8 @@ export const handler = defineHandler((helpers) => {
 })
 ```
 
+If you need a helper that is not currently available, please create an issue.
+
 ### User Options
 
 Your request handler can take in options from users of your handler:
@@ -218,5 +221,7 @@ export const handler = defineHandler(() => {
 ```
 
 ## Starter Templates
+
+See starter templates for how to setup a package that uses `unhttp`.
 
 - [unhttp-starter](examples/starter)

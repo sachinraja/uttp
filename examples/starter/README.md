@@ -107,3 +107,16 @@ app.use(await koaHandler(/* options */))
 ```
 
 </details>
+
+<details>
+<summary>AWS Lambda</summary><br>
+
+<!-- dprint-ignore -->
+```ts
+import { awsLambdaHandler } from 'unhttp-starter/adapters/aws-lambda'
+
+// requires es modules/top-level await/Node.js 14 runtime
+export const handler = await awsLambdaHandler(/* options */)
+```
+
+</details>
