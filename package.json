@@ -45,7 +45,7 @@
 	},
 	"peerDependencies": {
 		"express": "^4",
-		"fastify": "^3",
+		"fastify": "^3 || ^4.0.0",
 		"h3": "*",
 		"koa": "^2"
 	},
