@@ -30,7 +30,7 @@
 	],
 	"peerDependencies": {
 		"express": "^4",
-		"fastify": "^4",
+		"fastify": "^3 || ^4",
 		"h3": "*",
 		"koa": "^2"
 	},
