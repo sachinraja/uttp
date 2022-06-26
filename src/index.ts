@@ -7,6 +7,6 @@ export type {
 	HTTPRequest,
 	inferHandlerOptions,
 	RawRequest,
-	UnhttpResponse,
+	UttpResponse,
 } from './types.js'
 export { defineHandler } from './types.js'

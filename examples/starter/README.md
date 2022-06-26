@@ -1,23 +1,23 @@
-# unhttp-starter
+# uttp-starter
 
-Starter template for unhttp.
+Starter template for uttp.
 
 ## Usage
 
 1. Clone the template:
 
 ```
-npx degit sachinraja/unhttp/examples/starter
+npx degit sachinraja/uttp/examples/starter
 ```
 
-2. Replace all instances of `unhttp-starter` with your package name.
+2. Replace all instances of `uttp-starter` with your package name.
 
 3. Start developing! Most of the work should be done in [`src/handler.ts`](src/handler.ts).
 
 ## Install
 
 ```sh
-npm install unhttp-starter
+npm install uttp-starter
 ```
 
 <details>
@@ -25,7 +25,7 @@ npm install unhttp-starter
 
 ```ts
 import { createServer } from 'http'
-import { nodeHandler } from 'unhttp-starter/adapters/node'
+import { nodeHandler } from 'uttp-starter/adapters/node'
 
 const server = createServer(await nodeHandler(/* options */))
 ```
@@ -38,7 +38,7 @@ Example: [`scripts/node-server.ts`](scripts/node-server.ts)
 <summary>Express</summary><br>
 
 ```ts
-import { expressHandler } from 'unhttp-starter/adapters/express'
+import { expressHandler } from 'uttp-starter/adapters/express'
 
 app.use(await expressHandler(/* options */))
 ```
@@ -49,7 +49,7 @@ app.use(await expressHandler(/* options */))
 <summary>Fastify</summary><br>
 
 ```ts
-import { getFastifyPlugin } from 'unhttp-starter/adapters/fastify'
+import { getFastifyPlugin } from 'uttp-starter/adapters/fastify'
 
 server.register(await getFastifyPlugin(/* options */))
 ```
@@ -61,7 +61,7 @@ server.register(await getFastifyPlugin(/* options */))
 
 ```ts
 // Cloudflare Workers example
-import { fetchHandler } from 'unhttp-starter/adapters/fetch'
+import { fetchHandler } from 'uttp-starter/adapters/fetch'
 
 export default {
 	fetch: await fetchHandler(/* options */),
@@ -74,7 +74,7 @@ export default {
 <summary>h3</summary><br>
 
 ```ts
-import { h3Handler } from 'unhttp-starter/adapters/h3'
+import { h3Handler } from 'uttp-starter/adapters/h3'
 
 app.use(await h3Handler(/* options */))
 ```
@@ -88,7 +88,7 @@ app.use(await h3Handler(/* options */))
 
 <!-- dprint-ignore -->
 ```ts
-import { h3Handler } from 'unhttp-starter/adapters/h3'
+import { h3Handler } from 'uttp-starter/adapters/h3'
 
 const eventHandler = await h3Handler(/* options */)
 
@@ -101,7 +101,7 @@ export default eventHandler
 <summary>Koa</summary><br>
 
 ```ts
-import { koaHandler } from 'unhttp-starter/adapters/koa'
+import { koaHandler } from 'uttp-starter/adapters/koa'
 
 app.use(await koaHandler(/* options */))
 ```
@@ -113,7 +113,7 @@ app.use(await koaHandler(/* options */))
 
 <!-- dprint-ignore -->
 ```ts
-import { awsLambdaHandler } from 'unhttp-starter/adapters/aws-lambda'
+import { awsLambdaHandler } from 'uttp-starter/adapters/aws-lambda'
 
 // requires es modules/top-level await/Node.js 14 runtime
 export const handler = await awsLambdaHandler(/* options */)

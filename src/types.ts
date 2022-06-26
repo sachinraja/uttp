@@ -30,7 +30,7 @@ export interface HTTPRequest {
 	method: string
 }
 
-export type UnhttpResponse = {
+export type UttpResponse = {
 	status: number
 	headers?: HTTPHeaders
 	body: BodyInit | null | undefined
@@ -38,7 +38,7 @@ export type UnhttpResponse = {
 
 export type MaybePromise<T> = T | Promise<T>
 
-export type HandleRequest = (request: HTTPRequest) => MaybePromise<UnhttpResponse>
+export type HandleRequest = (request: HTTPRequest) => MaybePromise<UttpResponse>
 export interface AdapterOptions {
 	/**
 	 * The maximum size of the body (length of string) that will be read before throwing an error.

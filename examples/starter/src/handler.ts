@@ -1,10 +1,10 @@
-import { defineHandler, UnhttpResponse } from 'unhttp'
+import { defineHandler, UttpResponse } from 'uttp'
 import { User, userSchema } from './index.js'
 
 type MaybePromise<T> = T | Promise<T>
 
 export interface HandlerOptions {
-	handleUser(user: User): MaybePromise<UnhttpResponse['body']>
+	handleUser(user: User): MaybePromise<UttpResponse['body']>
 }
 
 export const handler = defineHandler((helpers, options: HandlerOptions) => {

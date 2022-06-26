@@ -1,4 +1,4 @@
-# unhttp
+# uttp
 
 write your request handlers once, run anywhere
 
@@ -15,7 +15,7 @@ currently supports:
 ## Install
 
 ```sh
-npm install unhttp
+npm install uttp
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ First, define your universal request handler:
 
 ```ts
 // handler.ts
-import { defineHandler } from 'unhttp'
+import { defineHandler } from 'uttp'
 
 export const handler = defineHandler(() => {
 	// return an object that will be used by each adapter
@@ -44,7 +44,7 @@ export const handler = defineHandler(() => {
 })
 ```
 
-For all server frameworks unhttp supports this will show `Hello world!` as HTML.
+For all server frameworks uttp supports this will show `Hello world!` as HTML.
 
 Then you can use adapters to get middleware/plugins/handlers for the server frameworks.
 
@@ -52,7 +52,7 @@ For Node:
 
 ```ts
 // adapters/node.ts
-import { getNodeAdapter } from 'unhttp/adapters/node'
+import { getNodeAdapter } from 'uttp/adapters/node'
 import { handler } from '../handler'
 
 export const nodeHandler = getNodeAdapter(handler)
@@ -74,7 +74,7 @@ For Fastify:
 
 ```ts
 // adapters/fastify.ts
-import { getFastifyAdapter } from 'unhttp/adapters/fastify'
+import { getFastifyAdapter } from 'uttp/adapters/fastify'
 import { handler } from '../handler'
 
 export const getFastifyPlugin = getFastifyAdapter(handler)
@@ -92,14 +92,14 @@ server.register(await getFastifyPlugin())
 server.listen(3000)
 ```
 
-Note these placed in a different entry point / file because `unhttp/adapters/*` imports directly from the server frameworks. You cannot export multiple handlers from the same entry point because users would be forced to install server frameworks that they are not using.
+Note these placed in a different entry point / file because `uttp/adapters/*` imports directly from the server frameworks. You cannot export multiple handlers from the same entry point because users would be forced to install server frameworks that they are not using.
 
 ### Request
 
 A universal request object is passed to `handleRequest` containing some common properties coerced from the individual frameworks:
 
 ```ts
-import { defineHandler } from 'unhttp'
+import { defineHandler } from 'uttp'
 
 export const handler = defineHandler(() => {
 	return {
@@ -124,7 +124,7 @@ export const handler = defineHandler(() => {
 Request handlers are passed a set of universal functions that vary in implementation across frameworks but retain the same signature:
 
 ```ts
-import { defineHandler } from 'unhttp'
+import { defineHandler } from 'uttp'
 
 export const handler = defineHandler((helpers) => {
   return {
@@ -159,7 +159,7 @@ If you need a helper that is not currently available, please create an issue.
 Your request handler can take in options from users of your handler:
 
 ```ts
-import { defineHandler } from 'unhttp'
+import { defineHandler } from 'uttp'
 
 interface HandlerOptions {
 	parse(text: string): any | Promise<any>
@@ -205,7 +205,7 @@ server.listen(3000)
 You must return an `adapterOptions` object. These options may be derived from user options. Here is an example with a description of what each option does:
 
 ```ts
-import { defineHandler } from 'unhttp'
+import { defineHandler } from 'uttp'
 
 export const handler = defineHandler(() => {
 	return {
@@ -222,6 +222,6 @@ export const handler = defineHandler(() => {
 
 ## Starter Templates
 
-See starter templates for how to setup a package that uses `unhttp`.
+See starter templates for how to setup a package that uses uttp.
 
-- [unhttp-starter](examples/starter)
+- [uttp-starter](examples/starter)
