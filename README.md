@@ -92,7 +92,7 @@ server.register(await getFastifyPlugin())
 server.listen(3000)
 ```
 
-Note these placed in a different entry point / file because `uttp/adapters/*` imports directly from the server frameworks. You cannot export multiple handlers from the same entry point because users would be forced to install server frameworks that they are not using.
+Note these are placed in different entry points / files because `uttp/adapters/*` imports directly from the server frameworks. You cannot export multiple handlers from the same entry point because users would be forced to install server frameworks that they are not using.
 
 ### Request
 
