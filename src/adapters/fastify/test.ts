@@ -7,7 +7,7 @@ testFetch('fastify', async (handler, port) => {
 	const fastifyAdapter = getFastifyAdapter(handler)
 	app.register(await fastifyAdapter())
 
-	await app.listen(port)
+	await app.listen({ port })
 
 	return {
 		close() {

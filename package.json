@@ -25,6 +25,10 @@
 			"types": "./dist/adapters/*/index.d.ts",
 			"import": "./dist/adapters/*/index.js",
 			"default": "./dist/adapters/*/index.cjs"
+		},
+		"./utils/runners": {
+			"import": "./dist/utils/runners.js",
+			"default": "./dist/utils/runners.cjs"
 		}
 	},
 	"files": [
@@ -56,7 +60,6 @@
 		"@types/koa": "2.13.4",
 		"@types/node": "18.0.0",
 		"dprint": "0.29.1",
-		"esbuild-node-loader": "0.8.0",
 		"eslint": "8.18.0",
 		"express": "4.18.1",
 		"fastify": "4.1.0",
@@ -66,6 +69,7 @@
 		"koa": "2.13.4",
 		"nano-staged": "0.8.0",
 		"npm-run-all": "4.1.5",
+		"pkgroll": "1.3.1",
 		"rimraf": "3.0.2",
 		"tsup": "6.1.2",
 		"typescript": "4.7.4",
@@ -80,7 +84,8 @@
 	"tsup": {
 		"entry": [
 			"src/index.ts",
-			"src/adapters/*/index.ts"
+			"src/adapters/*/index.ts",
+			"src/utils/runners.ts"
 		],
 		"format": [
 			"esm",

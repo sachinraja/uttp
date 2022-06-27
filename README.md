@@ -225,3 +225,31 @@ export const handler = defineHandler(() => {
 See starter templates for how to setup a package that uses uttp.
 
 - [uttp-starter](examples/starter)
+
+## Utilities
+
+uttp comes with some utils to help you build and test your handler.
+
+### Runners
+
+Runners are an easy way to get a server up for a framework by providing your handler. Only some frameworks are supported.
+
+```ts
+import {
+	runNode,
+	// runExpress,
+	// runFastify,
+	// runH3,
+	// runKoa,
+} from 'uttp/utils/runners'
+// your universal handler
+import { handler } from './handler.js'
+
+runNode(
+	handler,
+	// handler options as an array
+	[{ token: 'secret' }],
+	// server-related options
+	{ port: 3000 },
+)
+```

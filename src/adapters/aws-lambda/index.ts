@@ -29,9 +29,8 @@ export const getAwsLambdaAdapter = <THandler extends Handler>(
 				rawRequest: event as unknown as RawRequest,
 				body: event.body,
 				headers: event.headers,
-				url,
-				searchParams: url.searchParams,
 				method: event.requestContext.http.method,
+				url,
 			})
 
 			const headers: NonNullable<APIGatewayProxyStructuredResultV2['headers']> = {}

@@ -25,9 +25,8 @@ export interface HTTPRequest {
 	 */
 	body: unknown
 	headers: HTTPHeaders
-	url: URL
-	searchParams: URLSearchParams
 	method: string
+	url: URL
 }
 
 export type UttpResponse = {

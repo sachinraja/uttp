@@ -41,9 +41,8 @@ export const getFastifyAdapter = <THandler extends Handler>(
 					rawRequest: request as unknown as RawRequest,
 					body: request.body,
 					headers: request.headers,
-					url,
-					searchParams: url.searchParams,
 					method: request.method!,
+					url,
 				})
 
 				reply.status(response.status)

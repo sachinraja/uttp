@@ -19,9 +19,8 @@ export const getKoaAdapter = <THandler extends Handler>(
 				rawRequest: context.req as unknown as RawRequest,
 				body: context.body,
 				headers: context.headers,
-				url: context.URL,
-				searchParams: context.URL.searchParams,
 				method: context.method,
+				url: context.URL,
 			})
 
 			context.status = response.status
