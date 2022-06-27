@@ -23,7 +23,7 @@
 	"scripts": {
 		"build": "tsup",
 		"prepublishOnly": "pnpm build",
-		"test:node": "node --loader esbuild-node-loader scripts/node-client.ts"
+		"example": "tsx scripts/run.ts"
 	},
 	"keywords": [
 		"uttp"
@@ -46,6 +46,7 @@
 		"h3": "0.7.8",
 		"koa": "2.13.4",
 		"tsup": "6.0.1",
+		"tsx": "3.6.0",
 		"typescript": "4.7.2"
 	},
 	"tsup": {

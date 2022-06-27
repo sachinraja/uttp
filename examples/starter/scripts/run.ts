@@ -9,6 +9,8 @@ for (let index = 0; index < 100; index++) {
 	users[index] = Math.floor(Math.random() * 100)
 }
 
+const port = 3000
+
 await runNode(handler, [{
 	handleUser(user) {
 		const balance = users[user.id]
@@ -19,7 +21,7 @@ await runNode(handler, [{
 		return `${user.name} has $${balance}`
 	},
 }], {
-	port: 3000,
+	port,
 })
 
-console.log('listening on port 3000')
+console.log(`listening at http://localhost:${port}`)

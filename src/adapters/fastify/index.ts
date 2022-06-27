@@ -18,7 +18,7 @@ export const getFastifyAdapter = <THandler extends Handler>(
 
 				return getStringFromIncomingMessage(request.raw, { maxBodySize: handlerBag.adapterOptions.maxBodySize })
 			},
-		}, options)
+		}, ...options)
 
 		const plugin: FastifyPluginCallback = async (instance) => {
 			instance.removeAllContentTypeParsers()
