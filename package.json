@@ -51,6 +51,20 @@
 		"h3": "*",
 		"koa": "^2"
 	},
+	"peerDependenciesMeta": {
+		"express": {
+			"optional": true
+		},
+		"fastify": {
+			"optional": true
+		},
+		"h3": {
+			"optional": true
+		},
+		"koa": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
 		"@sachinraja/eslint-config": "0.1.1",
 		"@types/aws-lambda": "8.10.102",
