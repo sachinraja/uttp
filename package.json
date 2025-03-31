@@ -46,7 +46,7 @@
 		"test": "vitest"
 	},
 	"peerDependencies": {
-		"express": "^4",
+		"express": "^4 || ^5.0.0",
 		"fastify": "^3 || ^4",
 		"h3": "*",
 		"koa": "^2"
